@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#009900">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Start</title>
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="Content/bootstrap-theme.min.css" />
+
+    <!-- PNotify -->
+    <link rel="stylesheet" href="Scripts/PNotify/pnotify.custom.min.css" />
+
+    <!-- International Telephone Input -->
+    <link rel="stylesheet" href="Scripts/intl-tel-input/css/intlTelInput.css">
+
+    <!-- Custom code -->
+    <link href="Content/css/theme.css" rel="stylesheet">
+
+    <!-- Require.js -->
+    <script src="Scripts/require.js" data-main="ngApp/config"></script>
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project X</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse" ng-controller="navbarCtrl">
+                <ul class="nav navbar-nav">
+                    <li class="{{selectedTab == $index ? 'active' : ''}}" ng-repeat="x in tabs" ng-click="goToTab($index)">
+                        <a href="#">{{x}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mainContainer" class="container theme-showcase">
+        <div data-id="0">
+            <div class="form-horizontal">
+                <div class="page-header">
+                    <h2>Progress Bars</h2>
+                </div>
+                <div ng-controller="progressbarCtrl">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    The progress of this week:&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <input id="showWeekPercentageOption" ng-model="weekProgressShowText" ng-show="weekdayProgress < 20" type="checkbox" title="Show percentage" />
+                                    <label ng-show="weekdayProgress < 20" for="showWeekPercentageOption">Show percentage</label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-sm-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{ weekdayProgress }}" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': weekdayProgress + '%'}">
+                                            <p ng-show="(weekdayProgress >= 20) || weekProgressShowText">{{ weekdayProgress }}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    The progress of this month:&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <input id="showMonthPercentageOption" ng-model="monthProgressShowText" ng-show="monthProgress < 20" type="checkbox" title="Show percentage" />
+                                    <label ng-show="monthProgress < 20" for="showMonthPercentageOption">Show percentage</label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-sm-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ monthProgress }}" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': monthProgress + '%'}">
+                                            <p ng-show="(monthProgress >= 20) || monthProgressShowText">{{ monthProgress }}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    The progress of {{ thisYear }}:&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <input id="showYearPercentageOption" ng-model="yearProgressShowText" ng-show="yearProgress < 20" type="checkbox" title="Show percentage" />
+                                    <label ng-show="yearProgress < 20" for="showYearPercentageOption">Show percentage</label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-sm-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ yearProgress }}" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': yearProgress + '%'}">
+                                            <p ng-show="(yearProgress >= 20) || yearProgressShowText">{{ yearProgress }}%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-id="1" style="display: none">
+            <div class="jumbotron">
+                <h1>About</h1>
+                <p>This is my personal website! </p>
+            </div>
+        </div>
+
+        <div data-id="2" style="display: none">
+            <div class="form-horizontal">
+                <div class="page-header">
+                    <h1>Contact Us</h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <div class="panel panel-success" id="notesSection">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Please leave us a note</h3>
+                            </div>
+                            <div class="panel-body" ng-controller="contactCtrl">
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">Name: </label>
+                                    <div class="col-sm-10">
+                                        <input id="inputName" type="text" class="form-control" placeholder="Tell us your name" ng-model="user.Name" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Email: </label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Your email" ng-model="user.Email" ng-model-options="{'allowInvalid': true}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPhone" class="col-sm-2 control-label">Phone: </label>
+                                    <div class="col-sm-10">
+                                        <input type="tel" class="form-control" id="inputPhone" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputComments" class="col-sm-2 control-label">Comments: </label>
+                                    <div class="col-sm-10">
+                                        <textarea id="inputComments" type="text" class="form-control" placeholder="Leave your comments here" style="max-width: 100%" ng-model="user.Comment"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="btn btn-lg btn-success" ng-click="Submit()">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
